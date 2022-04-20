@@ -7,9 +7,11 @@ namespace ContactsApp.Library
     {
 
         private readonly Data.ContactsAppDataContext _data;
-        public UserThemeFilterService(Data.ContactsAppDataContext data)
+        private readonly Data.ApplicationDbContext _userData;
+        public UserThemeFilterService(Data.ContactsAppDataContext data, Data.ApplicationDbContext userData)
         {
             _data = data;
+            _userData = userData;
         }
 
 
