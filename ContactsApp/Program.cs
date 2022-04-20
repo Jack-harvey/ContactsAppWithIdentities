@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using System.Configuration;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -20,6 +21,12 @@ try
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
         .AddEntityFrameworkStores<ApplicationDbContext>();
+
+    builder.Services.AddDbContext<ContactsApp.Data.ContactsAppDataContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection"));
+    });
+
     builder.Services.AddControllersWithViews();
 
     var app = builder.Build();
