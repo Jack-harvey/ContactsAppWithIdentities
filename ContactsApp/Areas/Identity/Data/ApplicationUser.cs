@@ -4,6 +4,6 @@ namespace ContactsApp.Areas.Identity.Data
 {
     public class ApplicationUser : IdentityUser
     {
-        public string? ThemeSelected { get; set; }
+        public string? SelectedTheme { get; set; }
     }
 }
