@@ -1,0 +1,60 @@
+.form-select {
+  width: 66px;
+}
+
+#editLink {
+  font-size: 17px;
+}
+
+#deleteLink {
+  font-size: 17px;
+}
+
+#searchButton {
+  padding: 5px 5px;
+  font-size: 17px;
+}
+
+#eraseSearch {
+  font-size: 17px;
+}
+
+#userLoginSelect {
+    width: auto;
+}
+
+#draculaBat {
+    font-family: Arial;
+}
+
+#theme-toggle {
+  font-size: 20px;
+}
+
+#theme-toast {
+    bottom: 80px;
+    right: 100px;
+}
+
+input {
+    border-radius: 4px;
+    height: 27px;
+}
+
+body {
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+}
+
+td a {
+  text-decoration: none;
+}
+
+th a {
+  text-decoration: none;
+}
+
+tr {
+  cursor: pointer;
+}
+
