@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactsApp.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Security.Claims;
 
 namespace ContactsApp.Library
 {
@@ -8,30 +11,51 @@ namespace ContactsApp.Library
 
         private readonly Data.ContactsAppDataContext _data;
         private readonly Data.ApplicationDbContext _userData;
-        public UserThemeFilterService(Data.ContactsAppDataContext data, Data.ApplicationDbContext userData)
+        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly IHttpContextAccessor _contextAccessor;
+        private readonly ClaimsPrincipal _user;
+        public UserThemeFilterService(Data.ContactsAppDataContext data, Data.ApplicationDbContext userData, UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
         {
             _data = data;
             _userData = userData;
+            _userManager = userManager;
+            _user = contextAccessor.HttpContext.User;
+            
+            //_contextAccessor = contextAccessor;
         }
 
 
 
-        public string ThemeNameFromDbForLayout()
+        public async Task<string> ThemeNameFromDbForLayout()
         {
 
-            int fakeUserId = 2;
-            var userIdInDb = _data.Users.Find(fakeUserId);
+            //int fakeUserId = 2;
+            //var userIdInDb = _data.Users.Find(fakeUserId);
+            string defaultTheme = "atom-one-dark-theme";
+            if (!_user.Identity?.IsAuthenticated ?? false)
+            {
+                return defaultTheme;
+            }
 
-            if (userIdInDb == null)
-                return "";
-            if (userIdInDb.ThemeSelection == null)
-                return "";
-            if (userIdInDb.ThemeSelection == "Dracula")
-                return "dracula-theme";
-            if (userIdInDb.ThemeSelection == "atomOneDark")
-                return "atom-one-dark-theme";
+            var appUser = await _userManager.GetUserAsync(_user);
+            
+                
+                
+           return appUser?.SelectedTheme ?? defaultTheme;
 
-            return userIdInDb.ThemeSelection.ToString();
+
+            //var loggedInUser = User;
+            
+            //if (userIdInDb == null)
+            //    return "";
+            //if (userIdInDb.ThemeSelection == null)
+            //    return "";
+            //if (userIdInDb.ThemeSelection == "Dracula")
+            //    return "dracula-theme";
+            //if (userIdInDb.ThemeSelection == "atomOneDark")
+            //    return "atom-one-dark-theme";
+
+            //return userIdInDb.ThemeSelection.ToString();
         }
 
 
@@ -48,7 +72,7 @@ namespace ContactsApp.Library
         public void OnResultExecuting(ResultExecutingContext context)
         {
             var controller = context.Controller as Controller;
-            string themeName = ThemeNameFromDbForLayout();
+            string themeName = ThemeNameFromDbForLayout().GetAwaiter().GetResult();
             if(controller != null)
                 controller.ViewData["userTheme"] = themeName;
             ///base.OnResultExecuting(context);

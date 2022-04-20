@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using System.Configuration;
+using System.Security.Claims;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -26,7 +27,8 @@ try
         options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection"));
     });
     builder.Services.AddControllersWithViews();
-
+    //builder.Services.AddTransient<ClaimsPrincipal>(s => s.GetService<IHttpContextAccessor>().HttpContext?.User);
+    builder.Services.AddHttpContextAccessor();
     //This is used to add the theme to sharedlayout before it's a webpage
     builder.Services.AddScoped<ContactsApp.Library.UserThemeFilterService>();
 
