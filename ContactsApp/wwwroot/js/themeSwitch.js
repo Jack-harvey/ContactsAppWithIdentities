@@ -9,7 +9,7 @@ themeSwitch.addEventListener('click', () => {
 
     toastclasses.forEach((c) => toastyWarm.classList.remove(c));
 
-    $.post("home/SaveNewThemePreference", { userId: 2, themePreference: newTheme },
+    $.post("home/SaveNewThemePreference", { themePreference: newTheme },
         function (data, status, jqxhr) {
             if (data.result == 1) {
                 removeBodyThemes();
