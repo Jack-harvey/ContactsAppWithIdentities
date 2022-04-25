@@ -1,5 +1,6 @@
 using ContactsApp.Areas.Identity.Data;
 using ContactsApp.Data;
+using ContactsApp.Library;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -31,7 +32,7 @@ try
     builder.Services.AddHttpContextAccessor();
     //This is used to add the theme to sharedlayout before it's a webpage
     builder.Services.AddScoped<ContactsApp.Library.UserThemeFilterService>();
-
+    builder.Services.AddScoped<IUserUtilities, UserUtilities>();
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
     builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);

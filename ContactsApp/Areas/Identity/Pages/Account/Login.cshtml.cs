@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ContactsApp.Library;
 
 namespace ContactsApp.Areas.Identity.Pages.Account
 {
@@ -24,12 +25,14 @@ namespace ContactsApp.Areas.Identity.Pages.Account
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserUtilities _userUtilities;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager, IUserUtilities userUtilities)
         {
             _signInManager = signInManager;
             _logger = logger;
             _userManager = userManager;
+            _userUtilities = userUtilities;
         }
 
         /// <summary>
@@ -88,23 +91,22 @@ namespace ContactsApp.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async void ThemeGet()
-        {
-            var userObject = await _userManager.GetUserAsync(User);
-            string defaultTheme = "atom-one-dark-theme";
-            bool userAuth = User.Identity.IsAuthenticated;
+        //public async void ThemeGet()
+        //{
+        //    var userObject = await _userManager.GetUserAsync(User);
+        //    string defaultTheme = "atom-one-dark-theme";
 
-            //if (userAuth ? defaultTheme : userObject.SelectedTheme)
+        //    //(User?.Identity?.IsAuthenticated ?? false) == false ? ViewData["userTheme"] = defaultTheme : ViewData["userTheme"] = userObject.SelectedTheme;
 
-            if (!User.Identity?.IsAuthenticated ?? false)
-            {
-                ViewData["userTheme"] = defaultTheme;
-            }
-            else
-            {
-                ViewData["userTheme"] = userObject.SelectedTheme;
-            }
-        }
+        //    if (!User.Identity?.IsAuthenticated ?? false)
+        //    {
+        //        ViewData["userTheme"] = defaultTheme;
+        //    }
+        //    else
+        //    {
+        //        ViewData["userTheme"] = userObject.SelectedTheme;
+        //    }
+        //}
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -112,7 +114,9 @@ namespace ContactsApp.Areas.Identity.Pages.Account
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
-            ThemeGet();
+            //ThemeGet();
+            ViewData["userTheme"] = _userUtilities.GetUserTheme(await _userManager.GetUserAsync(User));
+            //ViewData["userTheme"] = StaticUserUtilitiers.GetUserTheme(await _userManager.GetUserAsync(User));
 
             returnUrl ??= Url.Content("~/");
 
