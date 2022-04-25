@@ -12,9 +12,11 @@ using ContactsApp.Models;
 using FileSignatures;
 using FileSignatures.Formats;
 using ContactsApp.Library;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContactsApp.Controllers
 {
+    [Authorize]
     [ServiceFilter(typeof(Library.UserThemeFilterService))]
     public class ContactsController : Controller
     {
