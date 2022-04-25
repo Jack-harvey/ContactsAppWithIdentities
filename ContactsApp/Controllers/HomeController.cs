@@ -39,10 +39,10 @@ namespace ContactsApp.Controllers
             {
                 return Json(new
                 {
-                    result = 0,
+                    result = themePreference == "" ? 0 : 1,
                     theme = themePreference,
                     message = themePreference == "" ?
-                    "Invalid theme selected" : "This user isn't authenticated"
+                    "Invalid theme selected" : "Log-in to save theme choice"
                 });
             }
 
