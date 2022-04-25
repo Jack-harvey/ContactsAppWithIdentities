@@ -5,22 +5,22 @@ themeSwitch.addEventListener('click', () => {
     const newTheme = document.body.classList.contains('dracula-theme') ? 'atom-one-dark-theme' : 'dracula-theme';
 
     const toastclasses = ['bg-primary', 'bg-success', 'bg-danger'];
-    var toastyWarm = document.getElementById('theme-toast');
+    var documentToastId = document.getElementById('theme-toast');
 
-    toastclasses.forEach((c) => toastyWarm.classList.remove(c));
+    toastclasses.forEach((c) => documentToastId.classList.remove(c));
 
     $.post("home/SaveNewThemePreference", { themePreference: newTheme },
         function (data, status, jqxhr) {
             if (data.result == 1) {
                 removeBodyThemes();
                 document.body.classList.add(data.theme);
-                toastyWarm.classList.add('bg-success');
+                documentToastId.classList.add('bg-success');
 
             } else {
-                toastyWarm.classList.add('bg-danger');
+                documentToastId.classList.add('bg-danger');
             }
-            toastyWarm.querySelector('.toast-body').innerHTML = data.message;
-            var toastPopsUp = new bootstrap.Toast(toastyWarm);
+            documentToastId.querySelector('.toast-body').innerHTML = data.message;
+            var toastPopsUp = new bootstrap.Toast(documentToastId);
             toastPopsUp.show();
         }
     );

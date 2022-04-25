@@ -88,15 +88,14 @@ namespace ContactsApp.Areas.Identity.Pages.Account
             public bool RememberMe { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async void ThemeGet()
         {
-            if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-
             var userObject = await _userManager.GetUserAsync(User);
             string defaultTheme = "atom-one-dark-theme";
+            bool userAuth = User.Identity.IsAuthenticated;
+
+            //if (userAuth ? defaultTheme : userObject.SelectedTheme)
+
             if (!User.Identity?.IsAuthenticated ?? false)
             {
                 ViewData["userTheme"] = defaultTheme;
@@ -105,6 +104,15 @@ namespace ContactsApp.Areas.Identity.Pages.Account
             {
                 ViewData["userTheme"] = userObject.SelectedTheme;
             }
+        }
+
+        public async Task OnGetAsync(string returnUrl = null)
+        {
+            if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+            ThemeGet();
 
             returnUrl ??= Url.Content("~/");
 
