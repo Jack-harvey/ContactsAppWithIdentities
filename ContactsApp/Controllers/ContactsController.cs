@@ -345,6 +345,12 @@ namespace ContactsApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                       .Where(y => y.Count > 0)
+                       .ToList();
+            }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", contact.CategoryId);
             return View(contact);
         }

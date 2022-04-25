@@ -31,7 +31,7 @@ namespace ContactsApp.Models
 
         [ForeignKey("CategoryId")]
         [InverseProperty("Contacts")]
-        public virtual Category Category { get; set; } = null!;
+        public virtual Category? Category { get; set; }/* = null!;*/
         [ForeignKey("CompanyId")]
         [InverseProperty("Contacts")]
         public virtual Company? Company { get; set; }
