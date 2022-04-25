@@ -8,6 +8,8 @@ using System.Security.Claims;
 
 namespace ContactsApp.Controllers
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
