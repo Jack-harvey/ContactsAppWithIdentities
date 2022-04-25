@@ -18,15 +18,18 @@ using Microsoft.Extensions.Logging;
 
 namespace ContactsApp.Areas.Identity.Pages.Account
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -90,6 +93,17 @@ namespace ContactsApp.Areas.Identity.Pages.Account
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+
+            var userObject = await _userManager.GetUserAsync(User);
+            string defaultTheme = "atom-one-dark-theme";
+            if (!User.Identity?.IsAuthenticated ?? false)
+            {
+                ViewData["userTheme"] = defaultTheme;
+            }
+            else
+            {
+                ViewData["userTheme"] = userObject.SelectedTheme;
             }
 
             returnUrl ??= Url.Content("~/");
