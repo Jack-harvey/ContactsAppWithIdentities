@@ -2,7 +2,7 @@
 
 const themeSwitch = document.getElementById('theme-toggle');
 themeSwitch.addEventListener('click', () => {
-    const newTheme = document.body.classList.contains('dracula-theme') ? 'atom-one-dark-theme' : 'dracula-theme';
+    const newTheme = document.body.classList.contains('dracula-theme') ? 'atom-one-light-theme' : 'dracula-theme';
 
     const toastclasses = ['bg-primary', 'bg-success', 'bg-danger'];
     var documentToastId = document.getElementById('theme-toast');
@@ -14,7 +14,7 @@ themeSwitch.addEventListener('click', () => {
             if (data.result == 1) {
                 removeBodyThemes();
                 document.body.classList.add(data.theme);
-                documentToastId.classList.add('bg-success');
+                documeC:\Users\JackH\source\repos\ContactsApp\ContactsApp\wwwroot\css\themes.cssntToastId.classList.add('bg-success');
 
             } else {
                 documentToastId.classList.add('bg-danger');

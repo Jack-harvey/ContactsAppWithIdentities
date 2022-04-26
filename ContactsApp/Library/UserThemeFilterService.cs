@@ -26,7 +26,7 @@ namespace ContactsApp.Library
 
         public async Task<string> ThemeNameFromDbForLayout()
         {
-            string defaultTheme = "atom-one-dark-theme";
+            string defaultTheme = "atom-one-light-theme";
             if (!_user.Identity?.IsAuthenticated ?? false)
             {
                 return defaultTheme;

@@ -6,7 +6,7 @@ namespace ContactsApp.Library
     {
         public static string GetUserTheme(ApplicationUser appUser)
         {
-            string defaultTheme = "atom-one-dark-theme";
+            string defaultTheme = "atom-one-light-theme";
 
             return appUser?.SelectedTheme ?? defaultTheme;
 

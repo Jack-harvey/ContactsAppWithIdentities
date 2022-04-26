@@ -29,6 +29,22 @@
   /* stroke='%23XXXXXX' replace with hex code */
   --atomOneDarkChevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c678dd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --atomOneDarkSpanBar: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c678dd' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+  --atomOneLightBackground: #fafafa;
+  --atomOneLightForeground: #383a42;
+  --atomOneLightSelection: #f4f4f4;
+  --atomOneLightComment: #696c77;
+  --atomOneLightAccent1: #ca1243;
+  --atomOneLightAccent2: #e45649;
+  --atomOneLightAccent3: #e5c07b;
+  --atomOneLightAccent4: #50a14f;
+  --atomOneLightAccent5: #a626a4;
+  --atomOneLightAccent6: #0184bc;
+  --atomOneLightAccent7: #4078f2;
+  --atomOneLightConstrast: #cecece;
+  /* stroke='%23XXXXXX' replace with hex code */
+  --atomOneLightChevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%234078F2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  --atomOneLightSpanBar: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%234078F2' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .dracula-theme {
@@ -59,6 +75,21 @@
 
   --selectListChevronColor: var(--atomOneDarkChevron);
   --spanNavBarColor: var(--atomOneDarkSpanBar);
+}
+
+.atom-one-light-theme {
+  --mainBackground: var(--atomOneLightBackground);
+  --fontColor: var(--atomOneLightForeground);
+  --accentSelection: var(--atomOneLightSelection);
+  --accentPrimary: var(--atomOneLightAccent7);
+  --accentSecondary: var(--atomOneLightAccent6);
+  --accentWarning: var(--atomOneLightAccent1);
+  --accentOption: var(--atomOneLightAccent2);
+  --accentComment: var(--atomOneLightComment);
+  --contrastBackground: var(--atomOneLightConstrast);
+
+  --selectListChevronColor: var(--atomOneLightChevron);
+  --spanNavBarColor: var(--atomOneLightSpanBar);
 }
 
 *:focus {
@@ -160,13 +191,13 @@ main {
 }
 
 #theme-toast {
-    background-color: var(--mainBackground) !important;
-    border-color: var(--accentSecondary);
-    color: var(--fontColor);
+  background-color: var(--mainBackground) !important;
+  border-color: var(--accentSecondary);
+  color: var(--fontColor);
 }
 
 input {
-    color: var(--accentSecondary);
+  color: var(--accentSecondary);
 }
 
 body {
