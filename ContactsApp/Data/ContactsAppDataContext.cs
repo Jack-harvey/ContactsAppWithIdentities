@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ContactsApp.Models;
+using ContactsApp.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace ContactsApp.Data
 {
-    public partial class ContactsAppDataContext : DbContext
+    public partial class ContactsAppDataContext : IdentityDbContext<ApplicationUser>
     {
         public ContactsAppDataContext()
         {
@@ -20,7 +23,8 @@ namespace ContactsApp.Data
         public virtual DbSet<Company> Companies { get; set; } = null!;
         public virtual DbSet<CompanyOffice> CompanyOffices { get; set; } = null!;
         public virtual DbSet<Contact> Contacts { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Theme> Themes { get; set; } = null!;
+        //public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<VwCompanyCount> VwCompanyCounts { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +38,33 @@ namespace ContactsApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+            //    entity.HasIndex(e => e.NormalizedUserName, "UserNameIndex")
+            //        .IsUnique()
+            //        .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.HasOne(d => d.Theme)
+                    .WithMany(p => p.AspNetUsers)
+                    .HasForeignKey(d => d.ThemeId)
+                    .HasConstraintName("FK_AspNetUsers_Themes");
+
+                //entity.HasMany(d => d.Roles)
+                //    .WithMany(p => p.Users)
+                //    .UsingEntity<Dictionary<string, object>>(
+                //        "AspNetUserRole",
+                //        l => l.HasOne<AspNetRole>().WithMany().HasForeignKey("RoleId"),
+                //        r => r.HasOne<AspNetUser>().WithMany().HasForeignKey("UserId"),
+                //        j =>
+                //        {
+                //            j.HasKey("UserId", "RoleId");
+
+                //            j.ToTable("AspNetUserRoles");
+
+                //            j.HasIndex(new[] { "RoleId" }, "IX_AspNetUserRoles_RoleId");
+                //        });
+            });
+
             modelBuilder.Entity<Company>(entity =>
             {
                 entity.Property(e => e.CompanyId).ValueGeneratedNever();
@@ -54,6 +85,12 @@ namespace ContactsApp.Data
             {
                 entity.Property(e => e.ContactId).ValueGeneratedNever();
 
+                entity.HasOne(d => d.AspNetUser)
+                    .WithMany(p => p.Contacts)
+                    .HasForeignKey(d => d.AspNetUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Contacts_AspNetUsers");
+
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Contacts)
                     .HasForeignKey(d => d.CategoryId)
@@ -71,6 +108,7 @@ namespace ContactsApp.Data
                 entity.ToView("vwCompanyCount");
             });
 
+            base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 

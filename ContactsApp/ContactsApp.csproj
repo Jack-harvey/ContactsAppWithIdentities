@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="tempModels\**" />
+    <Content Remove="tempModels\**" />
+    <EmbeddedResource Remove="tempModels\**" />
+    <None Remove="tempModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FileSignatures" Version="4.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.4" />

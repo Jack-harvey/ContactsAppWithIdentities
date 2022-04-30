@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace ContactsApp.Library
@@ -10,14 +11,14 @@ namespace ContactsApp.Library
     {
 
         private readonly Data.ContactsAppDataContext _data;
-        private readonly Data.ApplicationDbContext _userData;
+        //private readonly Data.ApplicationDbContext _userData;
         private readonly UserManager<ApplicationUser> _userManager;
         //private readonly IHttpContextAccessor _contextAccessor;
         private readonly ClaimsPrincipal _user;
-        public UserThemeFilterService(Data.ContactsAppDataContext data, Data.ApplicationDbContext userData, UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
+        public UserThemeFilterService(Data.ContactsAppDataContext data,  UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
         {
             _data = data;
-            _userData = userData;
+            //_userData = userData;
             _userManager = userManager;
             _user = contextAccessor.HttpContext.User;
 
@@ -31,9 +32,13 @@ namespace ContactsApp.Library
             {
                 return defaultTheme;
             }
-
             var appUser = await _userManager.GetUserAsync(_user);
-            return appUser?.SelectedTheme ?? defaultTheme;
+            var x = await _data.Users.Include(i => i.Theme).FirstOrDefaultAsync(f => f.Id == _user.FindFirstValue(ClaimTypes.NameIdentifier));
+            //return appUser.Theme.ClassName;
+            int? themeId = appUser.ThemeId;
+            var themeObject = await _data.Themes.FindAsync(themeId);
+            return themeObject.ClassName;
+            //return appUser?.SelectedTheme ?? defaultTheme;
         }
 
         public void OnResultExecuted(ResultExecutedContext context)

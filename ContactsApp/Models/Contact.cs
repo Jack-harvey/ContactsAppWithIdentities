@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using ContactsApp.Areas.Identity.Data;
+
 
 namespace ContactsApp.Models
 {
@@ -28,6 +30,8 @@ namespace ContactsApp.Models
         [StringLength(300)]
         public string? Notes { get; set; }
         public int CategoryId { get; set; }
+        [StringLength(450)]
+        public string AspNetUserId { get; set; } = null!;
 
         [ForeignKey("CategoryId")]
         [InverseProperty("Contacts")]
@@ -35,5 +39,8 @@ namespace ContactsApp.Models
         [ForeignKey("CompanyId")]
         [InverseProperty("Contacts")]
         public virtual Company? Company { get; set; }
+        [ForeignKey("AspNetUserId")]
+        [InverseProperty("Contacts")]
+        public virtual ApplicationUser AspNetUser { get; set; } = null!;
     }
 }

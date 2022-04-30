@@ -18,11 +18,11 @@ try
 
     // Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("dbConnection");
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+    //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    //    options.UseSqlServer(connectionString));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
     builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+        .AddEntityFrameworkStores<ContactsAppDataContext>();
     builder.Services.AddDbContext<ContactsApp.Data.ContactsAppDataContext>(options =>
     {
         options.UseSqlServer(builder.Configuration.GetConnectionString("dbConnection"));
