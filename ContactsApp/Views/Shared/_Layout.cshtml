@@ -27,16 +27,12 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">Contacts</a>
                         </li>
                     </ul>
                     <button id="theme-toggle" type="button" class="btn btn-default theme-toggle">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <i class="fa-solid @ViewData["themeIcon"]" id="theme-icon"></i>
                     </button>
-
                     <partial name="_LoginPartial" />
                 </div>
             </div>
