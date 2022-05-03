@@ -18,7 +18,7 @@
         <h5 id=draculaBat>(㇏(•̀ᵥᵥ•́)ノ)</h5>
     </div>
     <div class="ps-2">
-        <form asp-action="Index" method="POST">
+        <form asp-action="Index" method="POST" id="contacts-index-form">
             <div class="form-actions no-color">
                 <p>
                     Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
@@ -114,16 +114,20 @@
 
 <div class="d-flex">
     <div class="flex-grow-1 ps-2">
-        <select id="ddNumPages" class="form-select form-select-sm">
-            <option selected="@(rowsOnEachPage == 8)" value="8">8</option>
-            <option selected="@(rowsOnEachPage == 16)" value="16">16</option>
-            <option selected="@(rowsOnEachPage == 32)" value="32">32</option>
-        </select>
+        <form>
+            <select id="ddNumPages" class="form-select form-select-sm">
+                <option selected="@(rowsOnEachPage == 8)" value="8">8</option>
+                <option selected="@(rowsOnEachPage == 16)" value="16">16</option>
+                <option selected="@(rowsOnEachPage == 32)" value="32">32</option>
+            </select>
+        </form>
     </div>
-    <div class="flex-grow-1 text-end pe-2">
-        <button id="btnPrev" type="button" class="btn btn-primary @prevDisabled" @prevDisabled>Previous</button>
-        <button id="btnNext" type="button" class="btn btn-primary @nextDisabled" @nextDisabled>Next</button>
-    </div>
+    <form>
+        <div class="flex-grow-1 text-end pe-2">
+            <button id="btnPrev" type="button" class="btn btn-primary @prevDisabled" @prevDisabled>Previous</button>
+            <button id="btnNext" type="button" class="btn btn-primary @nextDisabled" @nextDisabled>Next</button>
+        </div>
+    </form>
 </div>
 
 
@@ -134,11 +138,8 @@
         const pageNumberElement = document.getElementById("pageNumber");
         let pageNumber = Number(pageNumberElement.value);
         pageNumber--;
-        //pageNumber = pageNumber - 1;
         pageNumberElement.value = pageNumber;
-        //pageNumberElement.value = Number(pageNumberElement.value)--;
-        //pageNumberElement.value = Number(pageNumberElement.value)-1;
-        document.forms[0].submit();
+        document.getElementById('contacts-index-form').submit();
     });
 
     document.getElementById("btnNext").addEventListener('click', function() {
@@ -146,16 +147,13 @@
         let pageNumber = Number(pageNumberElement.value);
         pageNumber++;
         pageNumberElement.value = pageNumber;
-
-
-        document.forms[0].submit();
+        document.getElementById('contacts-index-form').submit();
     });
 
     document.getElementById("ddNumPages").addEventListener('change', function() {
-    //document.getElementById("ddNumPages").addEventListener('change', function() {
-        //.. do stuff
         document.getElementById("rowsOnEachPage").value = this.value;
-        document.forms[0].submit();
+        document.getElementById('contacts-index-form').submit();
+
     });
 
     document.getElementById("nameSort").addEventListener('click', function() {
@@ -163,7 +161,9 @@
         //const nameSortElement = this; // this refers to the thing that called or triggered this function
         //document.getElementById("sortOrder").value = nameSortElement.dataset.sortOrder;
         updateSortOrder(this);
-        document.forms[0].submit();
+
+        document.getElementById('contacts-index-form').submit();
+
     });
 
     document.getElementById("companySort").addEventListener('click', function() {
@@ -171,17 +171,23 @@
         //const nameSortElement = this; // this refers to the thing that called or triggered this function
         //document.getElementById("sortOrder").value = nameSortElement.dataset.sortOrder;
         updateSortOrder(this);
-        document.forms[0].submit();
+
+        document.getElementById('contacts-index-form').submit();
+
     });
 
             document.getElementById("birthdateSort").addEventListener('click', function() {
         updateSortOrder(this);
-        document.forms[0].submit();
+
+        document.getElementById('contacts-index-form').submit();
+
     });
 
             document.getElementById("categorySort").addEventListener('click', function() {
         updateSortOrder(this);
-        document.forms[0].submit();
+
+        document.getElementById('contacts-index-form').submit();
+
     });
 
     function updateSortOrder(target) {
