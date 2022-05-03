@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -15,7 +17,7 @@ namespace ContactsApp.Library
         private readonly UserManager<ApplicationUser> _userManager;
         //private readonly IHttpContextAccessor _contextAccessor;
         private readonly ClaimsPrincipal _user;
-        public UserThemeFilterService(Data.ContactsAppDataContext data,  UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
+        public UserThemeFilterService(Data.ContactsAppDataContext data, UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
         {
             _data = data;
             //_userData = userData;
@@ -49,9 +51,20 @@ namespace ContactsApp.Library
         public void OnResultExecuting(ResultExecutingContext context)
         {
             var controller = context.Controller as Controller;
+            var page = context.Controller as PageModel;
             string themeName = ThemeNameFromDbForLayout().GetAwaiter().GetResult();
+            bool themeIsLight = themeName == "atom-one-light-theme" ? true : false;
+
             if (controller != null)
+            {
                 controller.ViewData["userTheme"] = themeName;
+                controller.ViewData["themeIcon"] = themeIsLight == true ? "fa-moon" : "fa-sun";
+            }
+            if (page != null)
+            {
+                page.ViewData["userTheme"] = themeName;
+                page.ViewData["themeIcon"] = themeIsLight == true ? "fa-moon" : "fa-sun";
+            }
             ///base.OnResultExecuting(context);
         }
     }
