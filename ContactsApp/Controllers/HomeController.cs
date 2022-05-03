@@ -33,7 +33,6 @@ namespace ContactsApp.Controllers
 
         public async Task<JsonResult> SaveNewThemePreference(string themePreference)
         {
-            var currentUserObject = await _userManager.GetUserAsync(User);
 
             if ((User?.Identity?.IsAuthenticated ?? false) == false || string.IsNullOrEmpty(themePreference))
             {
@@ -41,17 +40,34 @@ namespace ContactsApp.Controllers
                 {
                     result = themePreference == "" ? 0 : 1,
                     theme = themePreference,
+                    icon = themePreference == "dracula-theme" ?
+                    "fa-sun" : "fa-moon",
                     message = themePreference == "" ?
                     "Invalid theme selected" : "Log-in to save theme choice"
                 });
             }
 
-            currentUserObject.SelectedTheme = themePreference;
+            var currentUserObject = await _userManager.GetUserAsync(User);
+            if (themePreference == "dracula-theme")
+            {
+                currentUserObject.ThemeId = 1;
+            }
+            if (themePreference == "atom-one-dark-theme")
+            {
+                currentUserObject.ThemeId = 2;
+            }
+            if (themePreference == "atom-one-light-theme")
+            {
+                currentUserObject.ThemeId = 3;
+            }
+            //currentUserObject.SelectedTheme = themePreference;
             await _userManager.UpdateAsync(currentUserObject);
             return Json(new
             {
                 result = 1,
                 theme = themePreference,
+                icon = themePreference == "dracula-theme" ?
+                    "fa-sun" : "fa-moon",
                 message = themePreference == "dracula-theme" ?
                 "It's dracula baby!" : "Click change theme again, you did it wrong."
 
