@@ -16,6 +16,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ContactsApp.Areas.Identity.Pages.Account.Manage
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     public class DownloadPersonalDataModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ContactsApp.Areas.Identity.Pages.Account.Manage
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

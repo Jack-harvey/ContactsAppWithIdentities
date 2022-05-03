@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 namespace ContactsApp.Areas.Identity.Pages.Account
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     public class LoginWithRecoveryCodeModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

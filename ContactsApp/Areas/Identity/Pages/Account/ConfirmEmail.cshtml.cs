@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace ContactsApp.Areas.Identity.Pages.Account
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

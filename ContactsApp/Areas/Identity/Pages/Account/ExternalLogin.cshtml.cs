@@ -21,6 +21,8 @@ using Microsoft.Extensions.Logging;
 
 namespace ContactsApp.Areas.Identity.Pages.Account
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {

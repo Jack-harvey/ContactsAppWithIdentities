@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace ContactsApp.Areas.Identity.Pages.Account.Manage
 {
+    [ServiceFilter(typeof(Library.UserThemeFilterService))]
+
     public class EmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
