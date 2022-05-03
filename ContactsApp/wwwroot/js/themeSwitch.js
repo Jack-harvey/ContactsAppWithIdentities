@@ -6,15 +6,19 @@ themeSwitch.addEventListener('click', () => {
 
     const toastclasses = ['bg-primary', 'bg-success', 'bg-danger'];
     var documentToastId = document.getElementById('theme-toast');
+    var themeIconId = document.getElementById('theme-icon')
+    /*var baseUrl = "https://localhost:7063";*/
 
     toastclasses.forEach((c) => documentToastId.classList.remove(c));
-
-    $.post("home/SaveNewThemePreference", { themePreference: newTheme },
+    /*$.post((baseUrl.concat("/Home/SaveNewThemePreference")), { themePreference: newTheme },*/
+    $.post ("/Home/SaveNewThemePreference", { themePreference: newTheme },
         function (data, status, jqxhr) {
             if (data.result == 1) {
                 removeBodyThemes();
+                removeThemeIcons();
                 document.body.classList.add(data.theme);
-                documeC:\Users\JackH\source\repos\ContactsApp\ContactsApp\wwwroot\css\themes.cssntToastId.classList.add('bg-success');
+                documentToastId.classList.add('bg-success');
+                themeIconId.classList.add(data.icon);
 
             } else {
                 documentToastId.classList.add('bg-danger');
@@ -24,56 +28,6 @@ themeSwitch.addEventListener('click', () => {
             toastPopsUp.show();
         }
     );
-    //if (document.body.classList.contains('dracula-theme')) {
-    //    $.post("home/SaveNewThemePreference", { userId: 2, themePreference: "atom-one-dark-theme" },
-    //        function (data, status, jqxhr) {
-    //            removeBodyThemes();
-    //            if (data.result == 1) {
-    //                //document.body.classList.remove('atom-one-dark-theme');
-    //                //document.body.classList.add('dracula-theme');
-    //                document.body.classList.add(data.theme);
-    //                toastyWarm.classList.add('bg-success');
-    //                toastyWarm.querySelector('.toast-body').innerHTML = data.message;
-    //            } else {
-    //                toastyWarm.classList.add('bg-danger');
-    //                toastyWarm.querySelector('.toast-body').innerHTML = data.message;
-    //            }
-    //            var toastPopsUp = new bootstrap.Toast(toastyWarm);
-    //            toastPopsUp.show();
-    //        }
-    //    );
-    //    //document.body.classList.remove('dracula-theme',);
-    //    //document.body.classList.add('atom-one-dark-theme');
-    //    ////var toastyWarm = document.getElementById('theme-toast');
-    //    //var toastPopsUp = new bootstrap.Toast(toastyWarm);
-    //    //toastPopsUp.show();
-
-    //}
-    //else
-    //{
-    //    $.post("home/SaveNewThemePreference", { userId: 2, themePreference: "dracula-theme" },
-    //        function (data, status, jqxhr) {
-    //            removeBodyThemes();
-
-    //            if (data.result == 1) {
-    //                //document.body.classList.remove('atom-one-dark-theme');
-    //                //document.body.classList.add('dracula-theme');
-    //                document.body.classList.add('dracula-theme');
-    //                toastyWarm.classList.add('bg-success');
-    //                toastyWarm.querySelector('.toast-body').innerHTML = data.message;
-    //            } else {
-    //                toastyWarm.classList.add('bg-danger');
-    //                toastyWarm.querySelector('.toast-body').innerHTML = data.message;
-    //            }
-    //            var toastPopsUp = new bootstrap.Toast(toastyWarm);
-    //            toastPopsUp.show();
-    //        }
-    //    );
-
-
-
-
-    //}
 });
 
 function removeBodyThemes() {
@@ -81,4 +35,11 @@ function removeBodyThemes() {
         if (c.endsWith('theme'))
             document.body.classList.remove(c);
     });
+}
+
+function removeThemeIcons() {
+    document.getElementById('theme-icon').classList.forEach((c) => {
+        if (c.startsWith('fa-sun' || 'fa-moon'))
+            document.getElementById('theme-icon').classList.remove(c);
+    })
 }
