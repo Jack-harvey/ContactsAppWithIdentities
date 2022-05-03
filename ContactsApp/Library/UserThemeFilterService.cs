@@ -53,17 +53,17 @@ namespace ContactsApp.Library
             var controller = context.Controller as Controller;
             var page = context.Controller as PageModel;
             string themeName = ThemeNameFromDbForLayout().GetAwaiter().GetResult();
-            bool themeIsLight = themeName == "atom-one-light-theme" ? true : false;
+            var themeIcon = themeName == "atom-one-light-theme" ? "fa-moon" : "fa-sun";
 
             if (controller != null)
             {
                 controller.ViewData["userTheme"] = themeName;
-                controller.ViewData["themeIcon"] = themeIsLight == true ? "fa-moon" : "fa-sun";
+                controller.ViewData["themeIcon"] = themeIcon;
             }
             if (page != null)
             {
                 page.ViewData["userTheme"] = themeName;
-                page.ViewData["themeIcon"] = themeIsLight == true ? "fa-moon" : "fa-sun";
+                page.ViewData["themeIcon"] = themeIcon;
             }
             ///base.OnResultExecuting(context);
         }
