@@ -2,100 +2,129 @@
 
 @{
     ViewData["Title"] = "Details";
+    string altTextName = $"{Model.Firstname}'s display picture";
+
+
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Contact</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Firstname)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Firstname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Lastname)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Lastname)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Mobile)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Mobile)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Birthday)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        @{
-            string altTextName = $"{Model.Firstname}'s display picture";
-        }
-        <dt class="col-sm-2">
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@ViewBag.contactPictureToUse" class="img-thumbnail" alt="@altTextName">
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Company)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Company.CompanyId)
-        </dd>
-    </dl>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col col-lg-3">
-            <img src="@ViewBag.contactPictureToUse" class="img-fluid" alt="@altTextName">
-        </div>
-        <div class="col col-md-auto">
-            2 of 3 (wider)
+<!-- notesModal -->
+<div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notesModalLabel">Notes on @Html.DisplayFor(model => model.Firstname)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @Html.DisplayFor(model => model.Notes)
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col col-lg-3">
-            1 of 3
-        </div>
-        <div class="col col-md-auto">
-            2 of 3 (wider)
+</div>
+
+<!-- moreInfoModal -->
+<div class="modal fade" id="moreInfoModal" tabindex="-1" aria-labelledby="moreInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreInfoModalLabel">More Info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        First Name
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Firstname)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Last Name
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Lastname)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Mobile)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Phone)
+                    </dd>
+                    <dt class="col-sm-4">
+                        E-Mail Address
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Birthday)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Birthday)
+                    </dd>
+                    <dt class="col-sm-4">
+                        Contact type
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Category.Description)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Company)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Company.CompanyName)
+                    </dd>
+                </dl>
+            </div>
         </div>
     </div>
 </div>
 
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ContactId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container w-75 justify-content-center">
+
+    <div class="card text-center border">
+        <div class="card-header">
+            @Html.DisplayFor(model => model.Firstname) @Html.DisplayFor(model => model.Lastname)
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <img id="card-profile-picture" src="@ViewBag.contactPictureToUse" class="card-text rounded-circle border img-fluid" alt="@altTextName">
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                    <dt class="col">@Html.DisplayFor(model => model.Mobile)</dt>
+                    </dl>                    
+                    <dl class="row">
+                    <dt class="col">@Html.DisplayFor(model => model.Email)</dt>
+                    </dl>                    
+                    <dl class="row">
+                    <dt class="col">@Html.DisplayFor(model => model.Category.Description)</dt>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer font-color-theme-secondary">
+            <dl class="row">
+        <div class="col">
+            <a asp-action="Index"><i id="contactCardBackLink" class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="contact-card-button-notes" data-bs-toggle="modal" data-bs-target="#notesModal"><i class="fa-solid fa-note-sticky"></i></button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" id="contact-card-button-info" data-bs-toggle="modal" data-bs-target="#moreInfoModal"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="col contact-card-link">
+            <a asp-action="Edit" asp-route-id="@Model?.ContactId"><i id="contactCardEditLink" class="fa-solid fa-pen-to-square"></i></a>
+        </div>
+            </dl>
+        </div>
+    </div>
 </div>

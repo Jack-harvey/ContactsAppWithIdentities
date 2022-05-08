@@ -23,6 +23,7 @@ namespace ContactsApp.Models
         public string? Phone { get; set; }
         [StringLength(75)]
         public string? Email { get; set; }
+        [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         public DateTime? Birthday { get; set; }
         [StringLength(255)]

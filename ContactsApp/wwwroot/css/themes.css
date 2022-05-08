@@ -14,6 +14,7 @@
     /* stroke='%23XXXXXX' replace with hex code */
     --draculaChevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23bd93f9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     --draculaSpanBar: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23bd93f9' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --draculaCloseButton: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ff5555'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
     --atomOneDarkBackground: #282c34;
     --atomOneDarkForeground: #abb2bf;
     --atomOneDarkSelection: #4b5263;
@@ -29,6 +30,7 @@
     /* stroke='%23XXXXXX' replace with hex code */
     --atomOneDarkChevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c678dd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     --atomOneDarkSpanBar: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c678dd' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --atomOneDarkCloseButton: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23e06c75'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
     --atomOneLightBackground: #fafafa;
     --atomOneLightForeground: #383a42;
     --atomOneLightSelection: #f4f4f4;
@@ -44,6 +46,7 @@
     /* stroke='%23XXXXXX' replace with hex code */
     --atomOneLightChevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%234078F2' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     --atomOneLightSpanBar: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%234078F2' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    --atomOneLightCloseButton: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ca1243'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e");
 }
 
 .dracula-theme {
@@ -58,6 +61,7 @@
     --contrastBackground: var(--draculaContrast);
     --selectListChevronColor: var(--draculaChevron);
     --spanNavBarColor: var(--draculaSpanBar);
+    --closeButtonColor: var(--draculaCloseButton);
 }
 
 .atom-one-dark-theme {
@@ -72,6 +76,7 @@
     --contrastBackground: var(--atomOneDarkConstrast);
     --selectListChevronColor: var(--atomOneDarkChevron);
     --spanNavBarColor: var(--atomOneDarkSpanBar);
+    --closeButtonColor: var(--atomOneDarkCloseButton);
 }
 
 .atom-one-light-theme {
@@ -86,6 +91,7 @@
     --contrastBackground: var(--atomOneLightConstrast);
     --selectListChevronColor: var(--atomOneLightChevron);
     --spanNavBarColor: var(--atomOneLightSpanBar);
+    --closeButtonColor: var(--atomOneLightCloseButton);
 }
 
 *:focus {
@@ -107,8 +113,23 @@ main {
     color: var(--fontColor);
 }
 
+.card {
+    background-color: var(--mainBackground);
+    border-color: var(--accentSecondary) !important;
+}
+
+.card-header {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--contrastBackground);
+}
+
+.card-footer {
+    background-color: var(--contrastBackground);
+}
+
 .btn {
-    /*background-color: var(--mainBackground)*/;
+    /*background-color: var(--mainBackground);*/
     color: var(--fontColor);
     /*  border-color: var(--accentSecondary);*/
 }
@@ -135,6 +156,10 @@ main {
     color: var(--fontColor);
 }
 
+.btn-close {
+    background-image: var(--closeButtonColor);
+}
+
 .navbar-light .navbar-toggler-icon {
     background-image: var(--spanNavBarColor);
 }
@@ -157,6 +182,35 @@ main {
     .form-select:focus {
         border-color: var(--accentSecondary);
     }
+
+contact-card {
+    border: 2px;
+}
+
+.contact-card-bottom {
+    border-top: 1px;
+    border-top-color: var(--accentSecondary);
+    text-align: center;
+}
+
+.modal-content {
+    background-color: var(--mainBackground);
+    border-color: var(--accentSecondary);
+}
+
+.contact-card-button {
+    font-size: 20px;
+}
+
+
+.font-color-theme-secondary {
+    color: var(--accentSecondary);
+}
+
+#card-profile-picture {
+    border-color: var(--accentSecondary) !important;
+    border-width: 2px !important;
+}
 
 #btnPrev {
     border-color: var(--accentSecondary);
@@ -206,6 +260,15 @@ main {
     color: var(--accentOption)
 }
 
+#contactCardEditLink{
+    font-size: 20px;
+    padding-top: 4px;
+}
+#contactCardBackLink {
+    font-size: 20px;
+    padding-top: 4.5px;
+}
+
 #sharedNavBar {
     background-color: var(--contrastBackground);
 }
@@ -215,6 +278,42 @@ main {
     border-color: var(--accentSecondary);
     color: var(--fontColor);
 }
+
+#contact-card-button-info {
+    background: none;
+    border: none;
+    color: var(--accentPrimary);
+    padding: 0;
+    font-size: 20px;
+    margin: 0;
+    margin: 0;
+}
+
+    #contact-card-button-info :hover, .contact-card-button :active, .contact-card-button :focus {
+        background: none;
+        background-color: var(--contrastBackground);
+        border: none;
+        color: var(--accentPrimary);
+        padding: 0;
+        font-size: 20px;
+    }
+
+#contact-card-button-notes {
+    background: none;
+    border: none;
+    color: var(--accentPrimary);
+    padding: 0;
+    font-size: 20px;
+}
+
+    #contact-card-notes :hover, .contact-card-button :active, .contact-card-button :focus {
+        background: none;
+        background-color: var(--contrastBackground);
+        border: none;
+        color: var(--accentPrimary);
+        padding: 0;
+        font-size: 20px;
+    }
 
 input {
     color: var(--accentSecondary);
