@@ -32,7 +32,7 @@ namespace ContactsApp.Models
         public string? Notes { get; set; }
         public int CategoryId { get; set; }
         [StringLength(450)]
-        public string AspNetUserId { get; set; } = null!;
+        public string? AspNetUserId { get; set; }/* = null!;*/
 
         [ForeignKey("CategoryId")]
         [InverseProperty("Contacts")]
@@ -42,6 +42,6 @@ namespace ContactsApp.Models
         public virtual Company? Company { get; set; }
         [ForeignKey("AspNetUserId")]
         [InverseProperty("Contacts")]
-        public virtual ApplicationUser AspNetUser { get; set; } = null!;
+        public virtual ApplicationUser? AspNetUser { get; set; }/* = null!;*/
     }
 }

@@ -10,13 +10,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+@*            <div class="form-group">
                 <label asp-for="ContactId" class="control-label"></label>
                 <input asp-for="ContactId" class="form-control" />
                 <span asp-validation-for="ContactId" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="Firstname" class="control-label"></label>
                 <input asp-for="Firstname" class="form-control" />
@@ -29,7 +29,10 @@
             </div>
             <div class="form-group">
                 <label asp-for="CompanyId" class="control-label"></label>
-                <select asp-for="CompanyId" class ="form-control" asp-items="ViewBag.CompanyId"></select>
+                <select asp-for="CompanyId" class="form-select" asp-items="ViewBag.CompanyId">
+                    <option value="">None</option>
+                </select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Mobile" class="control-label"></label>
@@ -53,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
+                <input type="file" name="pictureUpload" class="form-control" />
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,7 +66,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId">
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

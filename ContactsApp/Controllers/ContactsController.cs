@@ -13,6 +13,8 @@ using FileSignatures;
 using FileSignatures.Formats;
 using ContactsApp.Library;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using ContactsApp.Areas.Identity.Data;
 
 namespace ContactsApp.Controllers
 {
@@ -24,13 +26,16 @@ namespace ContactsApp.Controllers
         private readonly ContactsAppDataContext _context;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _environment;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ContactsController(ILogger<ContactsController> logger, ContactsAppDataContext context, IConfiguration configuration, IWebHostEnvironment environment)
+
+        public ContactsController(ILogger<ContactsController> logger, ContactsAppDataContext context, IConfiguration configuration, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = context;
             _configuration = configuration;
             _environment = environment;
+            _userManager = userManager;
         }
 
 
@@ -218,9 +223,13 @@ namespace ContactsApp.Controllers
 
             try
             {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+
                 if (ModelState.IsValid && fileTypeValid)
                 {
                     contact.ContactId = Guid.NewGuid();
+                    contact.AspNetUserId = _userManager.GetUserId(User);
+                    
                     if (pictureUpload != null)
                     {
                         contact.Picture = await ImageSaver(pictureUpload, contact.Firstname, contact.Lastname);
