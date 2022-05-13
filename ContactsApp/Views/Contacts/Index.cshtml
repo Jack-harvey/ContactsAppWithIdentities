@@ -38,9 +38,10 @@
     </div>
 </div>
 
+<div class="table-responsive-sm">
 
-<table class="table table-hover">
-    <thead>
+<table class="table table-sm table-hover table-striped">
+    <thead class="">
         <tr>
             <th>
                 First Name
@@ -67,10 +68,13 @@
                 @*<a asp-action="Index" asp-route-sortOrder="@ViewData["CategoryIdSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Category</a>*@
                 <a href=# id="categorySort" class="sort-link" data-sort-order="@ViewData["CategoryIdSortParm"]">Category</a>
             </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="table table-striped">
         @foreach (var item in Model)
         {
             <tr onclick="location.href ='@(Url.Action("Details", "Contacts", new { id = item.ContactId}))'">
@@ -105,6 +109,7 @@
         }
     </tbody>
 </table>
+</div>
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";

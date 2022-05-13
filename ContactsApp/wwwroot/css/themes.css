@@ -160,6 +160,25 @@ main {
     background-image: var(--closeButtonColor);
 }
 
+.edit-form-select {
+    width: auto;
+}
+
+.btn-save-contact {
+    border-color: var(--accentSecondary);
+    background-color: var(--mainBackground);
+    vertical-align: middle;
+    padding-top: 1px;
+}
+
+    .btn-save-contact:hover {
+        background-color: var(--accentSelection);
+        color: var(--fontColor);
+    }
+
+#save-button {
+}
+
 .navbar-light .navbar-toggler-icon {
     background-image: var(--spanNavBarColor);
 }
@@ -260,10 +279,11 @@ contact-card {
     color: var(--accentOption)
 }
 
-#contactCardEditLink{
+#contactCardEditLink {
     font-size: 20px;
     padding-top: 4px;
 }
+
 #contactCardBackLink {
     font-size: 20px;
     padding-top: 4.5px;
@@ -306,14 +326,14 @@ contact-card {
     font-size: 20px;
 }
 
-    #contact-card-notes :hover, .contact-card-button :active, .contact-card-button :focus {
-        background: none;
-        background-color: var(--contrastBackground);
-        border: none;
-        color: var(--accentPrimary);
-        padding: 0;
-        font-size: 20px;
-    }
+#contact-card-notes :hover, .contact-card-button :active, .contact-card-button :focus {
+    background: none;
+    background-color: var(--contrastBackground);
+    border: none;
+    color: var(--accentPrimary);
+    padding: 0;
+    font-size: 20px;
+}
 
 input {
     color: var(--accentSecondary);
