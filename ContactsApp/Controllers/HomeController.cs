@@ -15,7 +15,6 @@ namespace ContactsApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ContactsAppDataContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ClaimsPrincipal _user;
 
         public HomeController(ILogger<HomeController> logger, ContactsAppDataContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
         {
