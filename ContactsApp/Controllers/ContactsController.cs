@@ -290,7 +290,7 @@ namespace ContactsApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("ContactId,Firstname,Lastname,CompanyId,Mobile,Phone,Email,Birthday,Picture,Notes,CategoryId")] Contact contact, IFormFile pictureUpload)
+        public async Task<IActionResult> Edit(Guid id, [Bind("ContactId,Firstname,Lastname,CompanyId,Mobile,Phone,Email,Birthday,Picture,Notes,CategoryId,AspNetUserId")] Contact contact, IFormFile pictureUpload)
 
         {
 

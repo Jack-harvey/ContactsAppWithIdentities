@@ -8,13 +8,18 @@
 
 <h1>Editing @Model.Firstname @Model.Lastname</h1>
 
+
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" enctype="multipart/form-data">
-            <input type="hidden" asp-for=Picture />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ContactId" />
+            <input type="hidden" asp-for="Picture" />
+            <div class="form-group">
+                <input type="hidden" class="form-control" asp-for="AspNetUserId" value=@Model.AspNetUserId />
+            </div>
             <div class="form-group">
                 <label asp-for="Firstname" class="control-label"></label>
                 <input asp-for="Firstname" class="form-control" />
@@ -79,9 +84,9 @@
         </form>
     </div>
     <div class="col-md-4 position-">
-                <img src="@ViewBag.contactPictureToUse" class="img-thumbnail" alt="@altTextName">
-            </div>
+        <img src="@ViewBag.contactPictureToUse" class="img-thumbnail" alt="@altTextName">
     </div>
+</div>
 </div>
 
 
@@ -89,12 +94,12 @@
 
 <div>
     <br />
-
+    <p>@Model.AspNetUserId</p>
     <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
